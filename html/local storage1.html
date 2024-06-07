@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form align="center">
+      
+        <label><b>Username:</b></label>
+        <input type="text" name="uname" id="txtname" placeholder="Enter Name...">
+        <button>Click Me</button>
+    </form><br>
+    <table border="1" rules="all" width="50%">
+        <thead>
+            <tr>
+                <th>Sr No.</th>
+                <th>Names</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        form=document.querySelector("form");
+        form.addEventListener("submit",(event)=>{
+            let name=event.target.uname.value;
+            let obj={name};
+            
+            let data=JSON.parse(localStorage.getItem("userrrdata")) ?? []
+            data.push(obj);
+
+            localStorage.setItem("userrrdata",JSON.stringify(data));
+            event.target.reset();
+            getData();
+            event.preventDefault();
+        })
+        let tbody=document.querySelector("table tbody")
+        let getData=()=>{
+             let data=JSON.parse(localStorage.getItem("userrrdata")) ?? []
+            let row='';
+            data.forEach((v,i)=>{
+                row+=`
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>${v.name}</td>
+                    </tr>
+                `
+            })
+            tbody.innerHTML=row;
+        }
+        getData()
+    </script>
+</body>
+</html>

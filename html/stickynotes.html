@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .para {
+            text-align: center;
+        }
+
+        textarea {
+            width: 20%;
+            padding: 4rem;
+            margin: 0 auto;
+            display: block;
+        }
+
+        button {
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+            margin-top: 20px;
+            border-radius: 2rem;
+            border: none;
+            padding: 1rem;
+            background-color: lightblue;
+            color: grey;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="para">Notes</p>
+    <form id="noteForm">
+        <textarea id="noteTextarea"></textarea>
+        <button type="button" onclick="saveNote()">Click here!</button>
+    </form>
+
+    <script>
+        function saveNote() {
+            // Get the content of the textarea
+            var noteContent = document.getElementById('noteTextarea').value;
+
+            // Retrieve existing notes from local storage or initialize an empty array
+            var existingNotes = JSON.parse(localStorage.getItem('userNotes')) || [];
+
+            // Add the new note to the array
+            existingNotes.push(noteContent);
+
+            // Store the updated array in local storage
+            localStorage.setItem('userNotes', JSON.stringify(existingNotes));
+
+            // Redirect to another HTML file
+            window.location.href = 'stickynotesdata.html';
+        }
+    </script>
+</body>
+</html>

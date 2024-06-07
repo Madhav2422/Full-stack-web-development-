@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="name">Username</label>
+        <input type="text" id="name"><br><br>
+        <label for="pass">Password</label>
+        <input type="password" id="pass"><br><br>
+        <label for="pass-1">Confirm</label>
+        <input type="password" id="pass-1"><br><br><br>
+
+       <button onclick="check();">Submit</button><br><br>
+     
+    </form>
+    <script>
+        function check()
+        {
+            let a = document.getElementById("pass").value;
+            let b = document.getElementById("pass-1").value;
+
+
+        if(a==b)
+         {
+           document.writeln("valid");
+         }
+         else
+         {
+            document.writeln("Invalid");
+         }
+        }
+       
+    </script>
+</body>
+</html>

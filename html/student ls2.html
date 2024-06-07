@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <form class="student">
+        <h2>Student Marksheet</h2>
+        <label for="sname">Name</label>
+        <input type="text" id="sname" name="sname" placeholder="Madhav Hirani">
+
+        <label for="eno">Enrollment Number</label>
+        <input type="text" id="eno" name="eno" placeholder="IU2141050083">
+
+        <label for="maths">Mathematics</label>
+        <input type="number" id="maths" name="maths" placeholder="90">
+
+        <label for="eng">English</label>
+        <input type="number" id="eng" name="eng" placeholder="80">
+
+        <button>Click me! </button>
+    </form>
+
+    <table border="1px" width="50%" rules="all" style="margin-top: 50px;">
+        <caption>Student Data</caption>
+        <thead>
+            <tr>
+                <th>Sr no</th>
+                <th>Name</th>
+                <th>Enrollment Number</th>
+                <th>Mathematics</th>
+                <th>English</th>
+                <th>Total</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+    <script>
+        form = document.querySelector("form");
+        form.addEventListener("submit", (event) => {
+            let name = event.target.sname.value;
+            let eno = event.target.eno.value;
+            let maths = parseFloat(event.target.maths.value) || 0;
+            let eng = parseFloat(event.target.eng.value) || 0;
+            let total = maths + eng;
+
+            let obj = { name, eno, maths, eng, total };
+
+            let data = JSON.parse(localStorage.getItem("userdata")) || [];
+            data.push(obj);
+
+            localStorage.setItem("userdata", JSON.stringify(data));
+            event.target.reset();
+            getData();
+            event.preventDefault();
+        });
+
+        let tbody = document.querySelector("table tbody");
+        let getData = () => {
+            let data = JSON.parse(localStorage.getItem("userdata")) ?? []
+            let row = '';
+            data.forEach((v, i) => {
+                row += `
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${v.name}</td>
+                        <td>${v.eno}</td>
+                        <td>${v.maths}</td>
+                        <td>${v.eng}</td>
+                        <td>${v.total}</td>
+                    </tr>
+                `
+            })
+            tbody.innerHTML = row;
+        }
+        getData()
+
+    </script>
+
+
+</body>
+
+</html>

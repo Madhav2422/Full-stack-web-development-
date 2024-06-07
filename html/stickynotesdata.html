@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other File</title>
+    <style>
+        .para {
+            text-align: center;
+        }
+
+        #displayNotes {
+            width: 50%;
+            padding: 2rem;
+            margin: 0 auto;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="para">Stored Notes</p>
+    <div id="displayNotes"></div>
+
+    <script>
+        // Retrieve the array of notes from local storage
+        var storedNotes = JSON.parse(localStorage.getItem('userNotes'));
+
+        // Display the notes in the designated div
+        var displayNotesDiv = document.getElementById('displayNotes');
+        if (storedNotes && storedNotes.length > 0) {
+            displayNotesDiv.innerHTML = "<ul>";
+            storedNotes.forEach(function(note) {
+                displayNotesDiv.innerHTML += "<li>" + note + "</li>";
+            });
+            displayNotesDiv.innerHTML += "</ul>";
+        } else {
+            displayNotesDiv.innerText = 'No notes stored.';
+        }
+    </script>
+</body>
+</html>
